@@ -8,37 +8,55 @@ function Store() {
       id: 1,
       name: "Cyberpunk 2077",
       price: 2999,
-      image: "/images/cyberpunk.jpg"
+      image: "/Images/cyberpunk.jpg",
+      features: ["Singleplayer", "Multiplayer"],
+      hasAchievements: true,
+      isPopular: false
     },
     {
       id: 2,
       name: "The Witcher 3",
       price: 1999,
-      image: "/images/witcher3.jpg"
+      image: "/Images/witcher3.jpg",
+      features: ["Singleplayer", "Multiplayer"],
+      hasAchievements: true,
+      isPopular: true
     },
     {
       id: 3,
       name: "Counter-Strike 2",
       price: 0,
-      image: "/images/cs2.jpg"
+      image: "/Images/cs2.jpg",
+      features: ["Singleplayer", "Multiplayer"],
+      hasAchievements: true,
+      isPopular: true
     },
     {
       id: 4,
       name: "Dota 2",
       price: 0,
-      image: "/images/dota2.jpg"
+      image: "/Images/dota2.jpg",
+      features: ["Multiplayer"],
+      hasAchievements: true,
+      isPopular: false
     },
     {
       id: 5,
       name: "Baldur's Gate 3",
       price: 3499,
-      image: "/images/baldurs-gate3.jpg"
+      image: "/Images/baldurs-gate3.jpg",
+      features: ["Singleplayer", "Multiplayer"],
+      hasAchievements: true,
+      isPopular: false
     },
     {
       id: 6,
       name: "Elden Ring",
       price: 3999,
-      image: "/images/elden-ring.jpg"
+      image: "/Images/elden-ring.jpg",
+      features: ["Singleplayer", "Multiplayer"],
+      hasAchievements: true,
+      isPopular: false
     }
   ]
 
@@ -47,7 +65,7 @@ function Store() {
       <div className="page-content">
         <header className="app-header">
           <h1>Steam Games Store</h1>
-          <p>Лучшие игры для Вас!</p>
+          <p>Лучшие игры для вашей коллекции</p>
         </header>
         <div className="products-grid">
           {games.map(game => (

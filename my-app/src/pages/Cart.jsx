@@ -34,13 +34,11 @@ function Cart() {
     <div className="page">
       <div className="page-content">
         <header className="app-header">
-          <h1>Корзина</h1>
-          <p>Ваши выбранные игры</p>
+          <h1>Товары в корзине</h1>
         </header>
         
         <div className="cart-container">
           <div className="cart-items-section">
-            <h2 className="section-title">Товары в корзине</h2>
             <div className="cart-items">
               {items.map(item => (
                 <div key={item.id} className="cart-item">
@@ -60,7 +58,6 @@ function Cart() {
                   <button 
                     className="remove-btn"
                     onClick={() => removeFromCart(item.id)}
-                    title="Удалить из корзины"
                   >
                     🗑️
                   </button>
@@ -111,15 +108,20 @@ function Cart() {
               </div>
             </div>
 
-            <div className="discount-info-card">
-              <h4>💎 Система скидок</h4>
-              <div className="discount-tier">
-                <span>От 5 000 ₽</span>
-                <span className="discount-percent">5% скидка</span>
-              </div>
-              <div className="discount-tier">
-                <span>От 10 000 ₽</span>
-                <span className="discount-percent">10% скидка</span>
+            <div className="discount-promo-banner">
+              <div className="discount-promo-icon">🎁</div>
+              <div className="discount-promo-content">
+                <h4>Система скидок</h4>
+                <div className="discount-tiers">
+                  <div className="discount-tier-item">
+                    <span className="tier-amount">От 5 000 ₽</span>
+                    <span className="tier-discount">-5% скидка</span>
+                  </div>
+                  <div className="discount-tier-item">
+                    <span className="tier-amount">От 10 000 ₽</span>
+                    <span className="tier-discount">-10% скидка</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

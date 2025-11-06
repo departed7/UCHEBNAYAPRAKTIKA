@@ -6,95 +6,65 @@ function Dashboard() {
   const { colors } = useTheme()
 
   return (
-    <div className="page" style={{ backgroundColor: colors.background }}>
+    <div className="page">
       <div className="page-content">
-        <div className="page-header">
-          <h1 style={{ color: colors.text }}>О нашем магазине</h1>
-        </div>
-        <div 
-          className="dashboard-content"
-          style={{ 
-            backgroundColor: colors.surface,
-            borderColor: colors.border
-          }}
-        >
-          <div className="info-section">
-            <h2 style={{ color: colors.text }}>🎮 Steam Store</h2>
-            <p style={{ color: colors.text }}>
-              Добро пожаловать в лучший магазин компьютерных игр! Мы предлагаем широкий ассортимент 
-              лицензионных игр для всех платформ по доступным ценам.
+        <header className="app-header">
+          <h1>Steam Games Store</h1>
+          <p>Лучшие игры для вашей коллекции</p>
+        </header>
+        
+        <div className="community-content">
+          <div className="community-header">
+            <h2>Сообщество Steam</h2>
+            <p>
+              Присоединяйтесь к нашему сообществу геймеров! Обсуждайте игры, делитесь достижениями 
+              и находите новых друзей для совместных игр.
             </p>
           </div>
           
-          <div className="discount-section">
-            <h3 style={{ color: colors.text }}>🎉 Система скидок</h3>
-            <div className="discount-cards">
-              <div 
-                className="discount-card"
-                style={{ 
-                  backgroundColor: colors.background,
-                  borderColor: colors.border
-                }}
-              >
-                <h4 style={{ color: colors.primary }}>5% скидка</h4>
-                <p style={{ color: colors.text }}>При заказе от 5 000 ₽</p>
-              </div>
-              <div 
-                className="discount-card"
-                style={{ 
-                  backgroundColor: colors.background,
-                  borderColor: colors.border
-                }}
-              >
-                <h4 style={{ color: colors.primary }}>10% скидка</h4>
-                <p style={{ color: colors.text }}>При заказе от 10 000 ₽</p>
-              </div>
+          <div className="community-stats">
+            <div className="stat-item">
+              <div className="stat-number">1M+</div>
+              <div className="stat-label">Активных игроков</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">5000+</div>
+              <div className="stat-label">Групп сообщества</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">Активное общение</div>
             </div>
           </div>
 
-          <div className="stats-grid">
-            <div 
-              className="stat-card"
-              style={{ 
-                backgroundColor: colors.background,
-                borderColor: colors.border
-              }}
-            >
-              <h3 style={{ color: colors.primary }}>5000+</h3>
-              <p style={{ color: colors.text }}>Игр в каталоге</p>
+          <div className="community-features">
+            <h3>Возможности сообщества:</h3>
+            <div className="features-grid">
+              <div className="feature-item">
+                <span className="feature-icon">💬</span>
+                <span>Обсуждение игр</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">👥</span>
+                <span>Совместные игры</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">🏆</span>
+                <span>Обмен достижениями</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">💰</span>
+                <span>Торговая площадка</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">👥</span>
+                <span>Группы по интересам</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">🎯</span>
+                <span>Турниры и события</span>
+              </div>
             </div>
-            <div 
-              className="stat-card"
-              style={{ 
-                backgroundColor: colors.background,
-                borderColor: colors.border
-              }}
-            >
-              <h3 style={{ color: colors.primary }}>1M+</h3>
-              <p style={{ color: colors.text }}>Довольных клиентов</p>
-            </div>
-            <div 
-              className="stat-card"
-              style={{ 
-                backgroundColor: colors.background,
-                borderColor: colors.border
-              }}
-            >
-              <h3 style={{ color: colors.primary }}>24/7</h3>
-              <p style={{ color: colors.text }}>Поддержка</p>
-            </div>
-          </div>
-
-          <div className="features">
-            <h3 style={{ color: colors.text }}>Наши преимущества:</h3>
-            <ul style={{ color: colors.text }}>
-              <li>✅ Мгновенная доставка ключей</li>
-              <li>✅ Гарантия лучшей цены</li>
-              <li>✅ Официальные дистрибьюторы</li>
-              <li>✅ Круглосуточная поддержка</li>
-              <li>✅ Бонусная программа</li>
-              <li>✅ Прогрессивная система скидок</li>
-            </ul>
           </div>
         </div>
       </div>

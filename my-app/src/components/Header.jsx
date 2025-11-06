@@ -12,34 +12,32 @@ function Header() {
     <header className="main-header">
       <div className="header-content">
         <div className="logo">
-          <span className="logo-icon">🎮</span>
           <span className="logo-text">STEAM STORE</span>
         </div>
         <nav className="nav-menu">
           <NavLink 
-            to="/" 
-            className="nav-link"
-          >
-            Главная
-          </NavLink>
-          <NavLink 
             to="/store" 
-            className="nav-link"
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
           >
             Магазин
           </NavLink>
           <NavLink 
-            to="/cart" 
-            className="nav-link"
+            to="/" 
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
           >
-            Корзина
+            Сообщество
+          </NavLink>
+          <NavLink 
+            to="/profile" 
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+          >
+            Профиль
           </NavLink>
         </nav>
         <div className="header-actions">
           <button 
             className="theme-toggle"
             onClick={toggleTheme}
-            title={isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'}
           >
             {isDark ? '☀️' : '🌙'}
           </button>
