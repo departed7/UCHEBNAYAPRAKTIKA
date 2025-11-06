@@ -1,7 +1,13 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
+import { useCart } from '../context/CartContext'
 import './Header.css'
 
-function Header({ totalItems }) {
+function Header() {
+  const { isDark, toggleTheme } = useTheme()
+  const { getTotalItems } = useCart()
+
   return (
     <header className="main-header">
       <div className="header-content">
@@ -10,18 +16,39 @@ function Header({ totalItems }) {
           <span className="logo-text">STEAM STORE</span>
         </div>
         <nav className="nav-menu">
-          <a href="#store" className="nav-link active">Магазин</a>
-          <a href="#community" className="nav-link">Сообщество</a>
-          <a href="#profile" className="nav-link">Профиль</a>
+          <NavLink 
+            to="/" 
+            className="nav-link"
+          >
+            Главная
+          </NavLink>
+          <NavLink 
+            to="/store" 
+            className="nav-link"
+          >
+            Магазин
+          </NavLink>
+          <NavLink 
+            to="/cart" 
+            className="nav-link"
+          >
+            Корзина
+          </NavLink>
         </nav>
         <div className="header-actions">
-          <button className="cart-btn">
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            title={isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'}
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
+          <NavLink to="/cart" className="cart-btn">
             <span className="cart-icon">🛒</span>
-            <span className="cart-count">{totalItems}</span>
-          </button>
-          <button className="profile-btn">
-            <span className="profile-avatar">👤</span>
-          </button>
+            {getTotalItems() > 0 && (
+              <span className="cart-count">{getTotalItems()}</span>
+            )}
+          </NavLink>
         </div>
       </div>
     </header>
