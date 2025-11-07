@@ -18,6 +18,9 @@ export const ThemeProvider = ({ children }) => {
       ? 'linear-gradient(135deg, #0c1c2c 0%, #1b2838 50%, #2a475e 100%)'
       : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%)'
     document.body.style.color = isDark ? '#c7d5e0' : '#333333'
+    
+    // Добавляем классы для темы
+    document.body.className = isDark ? 'dark-theme' : 'light-theme'
   }, [isDark])
 
   const toggleTheme = () => {

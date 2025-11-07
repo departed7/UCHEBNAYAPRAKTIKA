@@ -10,6 +10,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault()
     if (username && password) {
+      localStorage.setItem('isLoggedIn', 'true')
       navigate('/dashboard')
     }
   }

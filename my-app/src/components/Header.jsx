@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import { useCart } from '../context/CartContext'
 import './Header.css'
@@ -7,6 +7,24 @@ import './Header.css'
 function Header() {
   const { isDark, toggleTheme } = useTheme()
   const { getTotalItems } = useCart()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true'
+    setIsLoggedIn(loggedIn)
+  }, [location])
+
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
+  const handleLogout = () => {
+    localStorage.setItem('isLoggedIn', 'false')
+    setIsLoggedIn(false)
+    navigate('/')
+  }
 
   return (
     <header className="main-header">
@@ -14,6 +32,7 @@ function Header() {
         <div className="logo">
           <span className="logo-text">STEAM STORE</span>
         </div>
+        
         <nav className="nav-menu">
           <NavLink 
             to="/store" 
@@ -22,18 +41,13 @@ function Header() {
             Магазин
           </NavLink>
           <NavLink 
-            to="/" 
+            to="/dashboard" 
             className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
           >
             Сообщество
           </NavLink>
-          <NavLink 
-            to="/profile" 
-            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-          >
-            Профиль
-          </NavLink>
         </nav>
+
         <div className="header-actions">
           <button 
             className="theme-toggle"
@@ -41,6 +55,17 @@ function Header() {
           >
             {isDark ? '☀️' : '🌙'}
           </button>
+          
+          {isLoggedIn ? (
+            <button className="logout-btn" onClick={handleLogout}>
+              Выйти
+            </button>
+          ) : (
+            <NavLink to="/login" className="login-btn">
+              Войти
+            </NavLink>
+          )}
+          
           <NavLink to="/cart" className="cart-btn">
             <span className="cart-icon">🛒</span>
             {getTotalItems() > 0 && (

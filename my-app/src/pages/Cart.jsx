@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemeContext'
 import './Pages.css'
 
 function Cart() {
-  const { items, removeFromCart, getTotalPrice, getDiscountedPrice, getDiscountAmount, getDiscount, clearCart } = useCart()
+  const { items, removeFromCart, getTotalPrice, clearCart } = useCart()
   const { colors } = useTheme()
 
   const formatPrice = (price) => {
@@ -25,10 +25,7 @@ function Cart() {
     )
   }
 
-  const discount = getDiscount()
-  const discountAmount = getDiscountAmount()
   const totalPrice = getTotalPrice()
-  const finalPrice = getDiscountedPrice()
 
   return (
     <div className="page">
@@ -75,25 +72,12 @@ function Cart() {
                 <span>{formatPrice(totalPrice)}</span>
               </div>
 
-              {discount > 0 && (
-                <div className="summary-line discount">
-                  <span>Скидка {discount * 100}%</span>
-                  <span className="discount-amount">-{formatPrice(discountAmount)}</span>
-                </div>
-              )}
-
               <div className="summary-divider"></div>
 
               <div className="summary-line total">
                 <span>Итого</span>
-                <span className="final-price">{formatPrice(finalPrice)}</span>
+                <span className="final-price">{formatPrice(totalPrice)}</span>
               </div>
-
-              {discount > 0 && (
-                <div className="savings-badge">
-                  🎉 Вы экономите {formatPrice(discountAmount)}
-                </div>
-              )}
 
               <div className="cart-actions">
                 <button 
@@ -105,23 +89,6 @@ function Cart() {
                 <button className="checkout-btn">
                   💳 Оформить заказ
                 </button>
-              </div>
-            </div>
-
-            <div className="discount-promo-banner">
-              <div className="discount-promo-icon">🎁</div>
-              <div className="discount-promo-content">
-                <h4>Система скидок</h4>
-                <div className="discount-tiers">
-                  <div className="discount-tier-item">
-                    <span className="tier-amount">От 5 000 ₽</span>
-                    <span className="tier-discount">-5% скидка</span>
-                  </div>
-                  <div className="discount-tier-item">
-                    <span className="tier-amount">От 10 000 ₽</span>
-                    <span className="tier-discount">-10% скидка</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

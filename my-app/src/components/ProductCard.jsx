@@ -33,13 +33,12 @@ function ProductCard({ product }) {
       <div className="product-image">
         <img src={product.image} alt={product.name} />
         {cartQuantity > 0 && <div className="cart-badge">{cartQuantity}</div>}
-        {product.isPopular && <div className="game-badge">POPULAR</div>}
       </div>
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <div className="product-price">{formatPrice(product.price)}</div>
         <div className="product-features">
-          {product.features.map((feature, index) => (
+          {product.features?.map((feature, index) => (
             <span key={index} className="feature">{feature}</span>
           ))}
           {product.hasAchievements && (

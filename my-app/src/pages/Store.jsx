@@ -10,8 +10,7 @@ function Store() {
       price: 2999,
       image: "/Images/cyberpunk.jpg",
       features: ["Singleplayer", "Multiplayer"],
-      hasAchievements: true,
-      isPopular: false
+      hasAchievements: true
     },
     {
       id: 2,
@@ -19,8 +18,7 @@ function Store() {
       price: 1999,
       image: "/Images/witcher3.jpg",
       features: ["Singleplayer", "Multiplayer"],
-      hasAchievements: true,
-      isPopular: true
+      hasAchievements: true
     },
     {
       id: 3,
@@ -28,8 +26,7 @@ function Store() {
       price: 0,
       image: "/Images/cs2.jpg",
       features: ["Singleplayer", "Multiplayer"],
-      hasAchievements: true,
-      isPopular: true
+      hasAchievements: true
     },
     {
       id: 4,
@@ -37,8 +34,7 @@ function Store() {
       price: 0,
       image: "/Images/dota2.jpg",
       features: ["Multiplayer"],
-      hasAchievements: true,
-      isPopular: false
+      hasAchievements: true
     },
     {
       id: 5,
@@ -46,8 +42,7 @@ function Store() {
       price: 3499,
       image: "/Images/baldurs-gate3.jpg",
       features: ["Singleplayer", "Multiplayer"],
-      hasAchievements: true,
-      isPopular: false
+      hasAchievements: true
     },
     {
       id: 6,
@@ -55,8 +50,7 @@ function Store() {
       price: 3999,
       image: "/Images/elden-ring.jpg",
       features: ["Singleplayer", "Multiplayer"],
-      hasAchievements: true,
-      isPopular: false
+      hasAchievements: true
     }
   ]
 

@@ -20,16 +20,19 @@ const cartReducer = (state, action) => {
         ...state,
         items: [...state.items, { ...action.payload, quantity: 1 }]
       }
+    
     case 'REMOVE_FROM_CART':
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload)
       }
+    
     case 'CLEAR_CART':
       return {
         ...state,
         items: []
       }
+    
     default:
       return state
   }
@@ -66,25 +69,6 @@ export const CartProvider = ({ children }) => {
     return state.items.reduce((total, item) => total + (item.price * item.quantity), 0)
   }
 
-  const getDiscount = () => {
-    const total = getTotalPrice()
-    if (total >= 10000) return 0.1 // 10% скидка
-    if (total >= 5000) return 0.05 // 5% скидка
-    return 0
-  }
-
-  const getDiscountedPrice = () => {
-    const total = getTotalPrice()
-    const discount = getDiscount()
-    return total - (total * discount)
-  }
-
-  const getDiscountAmount = () => {
-    const total = getTotalPrice()
-    const discount = getDiscount()
-    return total * discount
-  }
-
   const getTotalItems = () => {
     return state.items.reduce((total, item) => total + item.quantity, 0)
   }
@@ -95,9 +79,6 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     clearCart,
     getTotalPrice,
-    getDiscountedPrice,
-    getDiscountAmount,
-    getDiscount,
     getTotalItems
   }
 

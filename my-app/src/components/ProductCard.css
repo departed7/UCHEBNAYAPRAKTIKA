@@ -103,22 +103,6 @@
   100% { transform: scale(1); }
 }
 
-.game-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 5px 20px rgba(38, 222, 129, 0.4);
-  animation: pulse 2s infinite;
-}
-
 .product-info {
   padding: 30px 25px 25px;
   position: relative;
