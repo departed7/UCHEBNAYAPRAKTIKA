@@ -4,14 +4,21 @@ import { useTheme } from '../context/ThemeContext'
 import './Pages.css'
 
 function Cart() {
-  const { items, removeFromCart, getTotalPrice, clearCart } = useCart()
+  const { 
+    cartItems, 
+    removeProductFromCart, 
+    increaseProductAmount, 
+    decreaseProductAmount,
+    clearCartProducts, 
+    getCartTotalPrice 
+  } = useCart()
   const { colors } = useTheme()
 
   const formatPrice = (price) => {
     return `${price.toLocaleString('ru-RU')} ₽`
   }
 
-  if (items.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="page">
         <div className="page-content">
@@ -25,7 +32,7 @@ function Cart() {
     )
   }
 
-  const totalPrice = getTotalPrice()
+  const totalPrice = getCartTotalPrice()
 
   return (
     <div className="page">
@@ -37,7 +44,7 @@ function Cart() {
         <div className="cart-container">
           <div className="cart-items-section">
             <div className="cart-items">
-              {items.map(item => (
+              {cartItems.map(item => (
                 <div key={item.id} className="cart-item">
                   <div className="item-image">
                     <img src={item.image} alt={item.name} />
@@ -46,15 +53,19 @@ function Cart() {
                     <h3 className="item-name">{item.name}</h3>
                     <div className="item-price-info">
                       <span className="item-price">{formatPrice(item.price)}</span>
-                      <span className="item-quantity">× {item.quantity}</span>
+                      <div className="amount-controls">
+                        <button onClick={() => decreaseProductAmount(item.id)}>-</button>
+                        <span className="item-amount">{item.amount}</span>
+                        <button onClick={() => increaseProductAmount(item.id)}>+</button>
+                      </div>
                     </div>
                     <div className="item-total">
-                      {formatPrice(item.price * item.quantity)}
+                      {formatPrice(item.price * item.amount)}
                     </div>
                   </div>
                   <button 
                     className="remove-btn"
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeProductFromCart(item.id)}
                   >
                     🗑️
                   </button>
@@ -68,7 +79,7 @@ function Cart() {
               <h3 className="summary-title">Сводка заказа</h3>
               
               <div className="summary-line">
-                <span>Товары ({items.length})</span>
+                <span>Товары ({cartItems.length})</span>
                 <span>{formatPrice(totalPrice)}</span>
               </div>
 
@@ -82,7 +93,7 @@ function Cart() {
               <div className="cart-actions">
                 <button 
                   className="clear-cart-btn"
-                  onClick={clearCart}
+                  onClick={clearCartProducts}
                 >
                   🗑️ Очистить корзину
                 </button>

@@ -5,13 +5,13 @@ import './ProductCard.css'
 
 function ProductCard({ product }) {
   const [showRedirect, setShowRedirect] = useState(false)
-  const { addToCart, items } = useCart()
+  const { addProductToCart, getProductAmount } = useCart()
   const navigate = useNavigate()
 
-  const cartQuantity = items.find(item => item.id === product.id)?.quantity || 0
+  const productAmount = getProductAmount(product.id)
 
-  const handleAddToCart = () => {
-    addToCart(product)
+  const handleAddProductToCart = () => {
+    addProductToCart(product)
     setShowRedirect(true)
     setTimeout(() => {
       setShowRedirect(false)
@@ -32,7 +32,7 @@ function ProductCard({ product }) {
       <div className="card-glow"></div>
       <div className="product-image">
         <img src={product.image} alt={product.name} />
-        {cartQuantity > 0 && <div className="cart-badge">{cartQuantity}</div>}
+        {productAmount > 0 && <div className="cart-badge">{productAmount}</div>}
       </div>
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
@@ -46,11 +46,11 @@ function ProductCard({ product }) {
           )}
         </div>
         <button 
-          className={`add-to-cart-btn ${cartQuantity > 0 ? 'added' : ''}`}
-          onClick={handleAddToCart}
+          className={`add-to-cart-btn ${productAmount > 0 ? 'added' : ''}`}
+          onClick={handleAddProductToCart}
         >
           <span className="btn-icon">🛒</span>
-          {cartQuantity > 0 ? 'Добавить ещё' : 'Добавить в корзину'}
+          {productAmount > 0 ? 'Добавить ещё' : 'Добавить в корзину'}
         </button>
         
         {showRedirect && (
@@ -65,10 +65,10 @@ function ProductCard({ product }) {
           </div>
         )}
         
-        {cartQuantity > 0 && !showRedirect && (
+        {productAmount > 0 && !showRedirect && (
           <div className="quantity-counter">
             <span className="counter-icon">📦</span>
-            В корзине: <strong>{cartQuantity}</strong>
+            В корзине: <strong>{productAmount}</strong>
           </div>
         )}
       </div>

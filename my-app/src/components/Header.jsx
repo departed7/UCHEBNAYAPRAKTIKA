@@ -6,7 +6,7 @@ import './Header.css'
 
 function Header() {
   const { isDark, toggleTheme } = useTheme()
-  const { getTotalItems } = useCart()
+  const { cartItems } = useCart()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
@@ -24,6 +24,10 @@ function Header() {
     localStorage.setItem('isLoggedIn', 'false')
     setIsLoggedIn(false)
     navigate('/')
+  }
+
+  const getCartItemsCount = () => {
+    return cartItems.reduce((total, item) => total + item.amount, 0)
   }
 
   return (
@@ -68,8 +72,8 @@ function Header() {
           
           <NavLink to="/cart" className="cart-btn">
             <span className="cart-icon">🛒</span>
-            {getTotalItems() > 0 && (
-              <span className="cart-count">{getTotalItems()}</span>
+            {getCartItemsCount() > 0 && (
+              <span className="cart-count">{getCartItemsCount()}</span>
             )}
           </NavLink>
         </div>

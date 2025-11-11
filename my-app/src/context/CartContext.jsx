@@ -4,33 +4,67 @@ const CartContext = createContext()
 
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
-      const existingItem = state.items.find(item => item.id === action.payload.id)
-      if (existingItem) {
+    case 'ADD_PRODUCT_TO_CART':
+      const existingCartItem = state.cartItems.find(
+        item => item.id === action.payload.id
+      )
+      
+      if (existingCartItem) {
         return {
           ...state,
-          items: state.items.map(item =>
+          cartItems: state.cartItems.map(item =>
             item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, amount: item.amount + 1 }
               : item
           )
         }
       }
+      
       return {
         ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }]
+        cartItems: [...state.cartItems, { ...action.payload, amount: 1 }]
       }
     
-    case 'REMOVE_FROM_CART':
+    case 'REMOVE_PRODUCT_FROM_CART':
       return {
         ...state,
-        items: state.items.filter(item => item.id !== action.payload)
+        cartItems: state.cartItems.filter(item => item.id !== action.payload)
       }
     
-    case 'CLEAR_CART':
+    case 'INCREASE_PRODUCT_AMOUNT':
       return {
         ...state,
-        items: []
+        cartItems: state.cartItems.map(item =>
+          item.id === action.payload
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        )
+      }
+    
+    case 'DECREASE_PRODUCT_AMOUNT':
+      return {
+        ...state,
+        cartItems: state.cartItems.map(item =>
+          item.id === action.payload
+            ? { ...item, amount: Math.max(0, item.amount - 1) }
+            : item
+        ).filter(item => item.amount > 0)
+      }
+    
+    case 'CLEAR_CART_PRODUCTS':
+      return {
+        ...state,
+        cartItems: []
+      }
+    
+    case 'UPDATE_PRODUCT_AMOUNT':
+      return {
+        ...state,
+        cartItems: state.cartItems.map(item =>
+          item.id === action.payload.itemId
+            ? { ...item, amount: Math.max(0, action.payload.newAmount) }
+            : item
+        ).filter(item => item.amount > 0)
       }
     
     default:
@@ -39,7 +73,7 @@ const cartReducer = (state, action) => {
 }
 
 const initialState = {
-  items: []
+  cartItems: []
 }
 
 export const useCart = () => {
@@ -53,33 +87,67 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
-  const addToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product })
+  const addProductToCart = (product) => {
+    dispatch({ type: 'ADD_PRODUCT_TO_CART', payload: product })
   }
 
-  const removeFromCart = (productId) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: productId })
+  const removeProductFromCart = (productId) => {
+    dispatch({ type: 'REMOVE_PRODUCT_FROM_CART', payload: productId })
   }
 
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' })
+  const increaseProductAmount = (productId) => {
+    dispatch({ type: 'INCREASE_PRODUCT_AMOUNT', payload: productId })
   }
 
-  const getTotalPrice = () => {
-    return state.items.reduce((total, item) => total + (item.price * item.quantity), 0)
+  const decreaseProductAmount = (productId) => {
+    dispatch({ type: 'DECREASE_PRODUCT_AMOUNT', payload: productId })
   }
 
-  const getTotalItems = () => {
-    return state.items.reduce((total, item) => total + item.quantity, 0)
+  const clearCartProducts = () => {
+    dispatch({ type: 'CLEAR_CART_PRODUCTS' })
+  }
+
+  const updateProductAmount = (productId, newAmount) => {
+    dispatch({ 
+      type: 'UPDATE_PRODUCT_AMOUNT', 
+      payload: { itemId: productId, newAmount } 
+    })
+  }
+
+  const getCartTotalPrice = () => {
+    return state.cartItems.reduce((total, item) => total + (item.price * item.amount), 0)
+  }
+
+  const getCartItemsCount = () => {
+    return state.cartItems.reduce((total, item) => total + item.amount, 0)
+  }
+
+  const getCartItemsQuantity = () => {
+    return state.cartItems.length
+  }
+
+  const isProductInCart = (productId) => {
+    return state.cartItems.some(item => item.id === productId)
+  }
+
+  const getProductAmount = (productId) => {
+    const item = state.cartItems.find(item => item.id === productId)
+    return item ? item.amount : 0
   }
 
   const value = {
-    items: state.items,
-    addToCart,
-    removeFromCart,
-    clearCart,
-    getTotalPrice,
-    getTotalItems
+    cartItems: state.cartItems,
+    addProductToCart,
+    removeProductFromCart,
+    increaseProductAmount,
+    decreaseProductAmount,
+    clearCartProducts,
+    updateProductAmount,
+    getCartTotalPrice,
+    getCartItemsCount,
+    getCartItemsQuantity,
+    isProductInCart,
+    getProductAmount
   }
 
   return (
